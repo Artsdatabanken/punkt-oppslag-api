@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "log-less-fancy": "^1.4.0",
     "proj4": "^2.5.0",
     "sqlite3": "^4.0.9"
   }
