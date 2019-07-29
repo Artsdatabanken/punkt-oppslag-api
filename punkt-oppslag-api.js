@@ -3,7 +3,7 @@ const express = require("express");
 const log = require("log-less-fancy")();
 const minimist = require("minimist");
 const routes = require("./src/routes");
-const index = require("./src/index");
+const Index = require("./src/index");
 const pjson = require("./package.json");
 
 var argv = minimist(process.argv.slice(2), { alias: { p: "port" } });
@@ -39,7 +39,9 @@ app.use(function(req, res, next) {
 });
 
 const port = argv.port || 8000;
+const index = new Index();
 index.rootDirectory = path.resolve(argv._[0] || ".");
+index.load();
 
 routes(app, index);
 
