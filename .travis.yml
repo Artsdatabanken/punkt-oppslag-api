@@ -22,8 +22,6 @@ notifications:
   on_success: change
   on_failure: change
   on_pull_requests: false
-before_script: greenkeeper-lockfile-update
-after_script: greenkeeper-lockfile-upload
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
