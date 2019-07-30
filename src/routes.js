@@ -3,12 +3,19 @@ module.exports = function(app, index) {
     index
       .get(req.params.x, req.params.y)
       .then(node => {
-        node = collapse(node);
-        const r = {};
-        Object.keys(node).forEach(key => {
-          r[key] = { ...node[key], ...index.config.meta[key] };
-        });
         if (!node) return next();
+        node = collapse(node);
+        const r = {
+          fylke: "Telemark",
+          kommune: "Tinn",
+          miljø: {}
+        };
+        Object.keys(node).forEach(key => {
+          const o = { ...node[key], ...index.config.meta[key] };
+
+          r.miljø[key] = o;
+        });
+
         res.setHeader("Content-Type", "application/json");
         res.send(r);
       })
