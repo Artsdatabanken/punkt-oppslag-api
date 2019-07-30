@@ -51,11 +51,27 @@ class Index {
     config.bounds.width = config.bounds.right - config.bounds.left;
     config.bounds.height = config.bounds.top - config.bounds.bottom;
     this.config = config;
-    this.db = this.openDatabase(this.rootDirectory, config.buildPath);
+    const buildpath = path.join(this.rootDirectory, config.buildPath);
+    this.db = this.openDatabase(buildpath);
+
+    this.loadMeta(buildpath);
   }
 
-  openDatabase(rootDirectory, buildPath) {
-    const sqlitePath = path.join(rootDirectory, buildPath, "index.sqlite");
+  loadMeta(buildpath) {
+    const layers = Object.keys(this.config.layers);
+    const metapath = path.join(buildpath, "meta");
+    const r = {};
+    layers.forEach(
+      layer =>
+        (r[layer] = JSON.parse(
+          fs.readFileSync(path.join(metapath, layer + ".json"))
+        ))
+    );
+    this.config.meta = r;
+  }
+
+  openDatabase(buildPath) {
+    const sqlitePath = path.join(buildPath, "index.sqlite");
     log.info("Reading tiles from " + sqlitePath);
     return new sqlite3.Database(sqlitePath, sqlite3.OPEN_READ, err => {
       if (err) throw new Error(err);
