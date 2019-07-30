@@ -11,7 +11,7 @@ module.exports = function(app, index) {
         next(err);
       });
   });
-};
+
   app.get("/:x,:y", (req, res, next) => {
     index
       .get(req.params.x, req.params.y)
