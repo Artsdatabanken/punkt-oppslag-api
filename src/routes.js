@@ -25,13 +25,13 @@ module.exports = function(app, index) {
             navn: "Rjukanfossen",
             kategori: ["ferskvann", "rennendeVann", "foss"]
           },
-          miljø: {}
+          environment: {}
         };
         Object.keys(node).forEach(key => {
           const o = { ...node[key], ...index.config.meta[key] };
           delete o.kart;
           delete o.bbox;
-          r.miljø[key] = o;
+          r.environment[key] = o;
         });
 
         res.setHeader("Content-Type", "application/json");
