@@ -1,4 +1,17 @@
 module.exports = function(app, index) {
+  app.get("/raw/:x,:y", (req, res, next) => {
+    index
+      .get(req.params.x, req.params.y)
+      .then(node => {
+        if (!node) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.send(node);
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
+};
   app.get("/:x,:y", (req, res, next) => {
     index
       .get(req.params.x, req.params.y)
@@ -10,13 +23,14 @@ module.exports = function(app, index) {
           kommune: "Tinn",
           sted: {
             navn: "Rjukanfossen",
-            kategori: "ferskvann_rennendeVann_foss"
+            kategori: ["ferskvann", "rennendeVann", "foss"]
           },
           miljø: {}
         };
         Object.keys(node).forEach(key => {
           const o = { ...node[key], ...index.config.meta[key] };
-
+          delete o.kart;
+          delete o.bbox;
           r.miljø[key] = o;
         });
 
