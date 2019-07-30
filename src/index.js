@@ -16,7 +16,7 @@ class Index {
     let coord = reproject(x, y);
     coord = this.normalize(coord, this.config.bounds);
     let key = "";
-    const r = { x, y };
+    const r = {};
     let z = 0;
     while (true) {
       const tile = await this.getTile(key);
