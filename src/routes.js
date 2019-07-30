@@ -8,6 +8,10 @@ module.exports = function(app, index) {
         const r = {
           fylke: "Telemark",
           kommune: "Tinn",
+          sted: {
+            navn: "Rjukanfossen",
+            kategori: "ferskvann_rennendeVann_foss"
+          },
           miljø: {}
         };
         Object.keys(node).forEach(key => {
