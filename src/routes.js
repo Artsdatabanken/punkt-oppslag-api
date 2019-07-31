@@ -40,13 +40,17 @@ module.exports = function(app, index) {
           if (key !== "kommune") r.environment[key] = o;
         });
         if (node.kommune) {
-          const knr =
+          r.k = node.kommune;
+          let knr =
             node.kommune.v.length < 4 ? "0" + node.kommune.v : node.kommune.v;
+          r.knr = knr;
+          /*
           r.kommune =
             index.config.meta[
               `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
             ];
           r.fylke = index.config.meta[`AO-${knr.substring(0, 2)}`];
+          */
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
