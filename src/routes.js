@@ -30,6 +30,12 @@ module.exports = function(app, index) {
           delete o.kart;
           delete o.bbox;
           delete o.gradient;
+          delete o.type;
+          delete o.flagg;
+          delete o.farge;
+          delete o.nivå;
+          delete o.undernivå;
+          delete o.datakilde;
           aktiver(o.barn, o.v);
           r.environment[key] = o;
         });
@@ -58,8 +64,12 @@ function collapse(node) {
 }
 
 function aktiver(barn, verdi) {
+  if (!barn) return;
   barn.forEach(b => {
     const { min, max } = b.intervall;
     b.aktiv = min <= verdi && max >= verdi;
+    delete b.normalisertVerdi;
+    delete b.farge;
+    b.bilde = b.url + "/foto_408.jpg";
   });
 }
