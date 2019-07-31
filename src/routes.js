@@ -37,7 +37,8 @@ module.exports = function(app, index) {
           delete o.undernivå;
           delete o.datakilde;
           aktiver(o.barn, o.v);
-          r.environment[key] = o;
+          if (key === "kommune") r.kommune = o;
+          else r.environment[key] = o;
         });
         if (r.kommune) {
           r.kommune =
