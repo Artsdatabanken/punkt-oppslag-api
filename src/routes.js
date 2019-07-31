@@ -37,11 +37,11 @@ module.exports = function(app, index) {
           delete o.undernivå;
           delete o.datakilde;
           aktiver(o.barn, o.v);
-          if (key === "kommune") r.kommune = o;
-          else r.environment[key] = o;
+          if (key !== "kommune") r.environment[key] = o;
         });
-        if (r.kommune) {
-          const knr = r.kommune.length < 4 ? "0" + r.kommune.v : r.kommune.v;
+        if (node.kommune) {
+          const knr =
+            node.kommune.v.length < 4 ? "0" + node.kommune.v : node.kommune.v;
           r.kommune =
             index.config.meta[
               `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
