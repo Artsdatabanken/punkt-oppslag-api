@@ -33,12 +33,12 @@ module.exports = function(app, index) {
           aktiver(o.barn, o.v);
           r.environment[key] = o;
         });
-        if (o.kommune) {
-          o.kommune =
+        if (r.kommune) {
+          r.kommune =
             index.config.meta[
-              `AO-${o.kommune.substring(0, 2)}-${o.kommune.substring(2, 4)}`
+              `AO-${r.kommune.substring(0, 2)}-${r.kommune.substring(2, 4)}`
             ];
-          o.fylke = index.config.meta[`AO-${o.kommune.substring(0, 2)}`];
+          r.fylke = index.config.meta[`AO-${r.kommune.substring(0, 2)}`];
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
