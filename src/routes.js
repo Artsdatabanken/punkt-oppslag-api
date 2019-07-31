@@ -30,6 +30,7 @@ module.exports = function(app, index) {
           delete o.kart;
           delete o.bbox;
           delete o.gradient;
+          aktiver(o.barn, o.v);
           r.environment[key] = o;
         });
         if (o.kommune) {
@@ -54,4 +55,11 @@ function collapse(node) {
     r = Object.assign(r, node[key]);
   });
   return r;
+}
+
+function aktiver(barn, verdi) {
+  barn.forEach(b => {
+    const { min, max } = b.intervall;
+    b.aktiv = min <= verdi && max >= verdi;
+  });
 }
