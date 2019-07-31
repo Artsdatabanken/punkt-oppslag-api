@@ -41,11 +41,12 @@ module.exports = function(app, index) {
           else r.environment[key] = o;
         });
         if (r.kommune) {
+          const knr = r.kommune.length < 4 ? "0" + r.kommune.v : r.kommune.v;
           r.kommune =
             index.config.meta[
-              `AO-${r.kommune.substring(0, 2)}-${r.kommune.substring(2, 4)}`
+              `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
             ];
-          r.fylke = index.config.meta[`AO-${r.kommune.substring(0, 2)}`];
+          r.fylke = index.config.meta[`AO-${knr.substring(0, 2)}`];
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
