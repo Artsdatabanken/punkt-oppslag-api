@@ -19,8 +19,6 @@ module.exports = function(app, index) {
         if (!node) return next();
         node = collapse(node);
         const r = {
-          fylke: "Telemark",
-          kommune: "Tinn",
           sted: {
             navn: "Rjukanfossen",
             kategori: ["ferskvann", "rennendeVann", "foss"]
@@ -31,9 +29,12 @@ module.exports = function(app, index) {
           const o = { ...node[key], ...index.config.meta[key] };
           delete o.kart;
           delete o.bbox;
+          delete o.gradient;
           r.environment[key] = o;
         });
-
+        if(o.kommune) {
+          o.kommune = index.config.meta[`AO-${o.kommune.substring(0,2)}-${o.kommune.substring(2,4)`]
+        }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
       })
