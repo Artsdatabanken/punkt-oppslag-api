@@ -32,8 +32,12 @@ module.exports = function(app, index) {
           delete o.gradient;
           r.environment[key] = o;
         });
-        if(o.kommune) {
-          o.kommune = index.config.meta[`AO-${o.kommune.substring(0,2)}-${o.kommune.substring(2,4)`]
+        if (o.kommune) {
+          o.kommune =
+            index.config.meta[
+              `AO-${o.kommune.substring(0, 2)}-${o.kommune.substring(2, 4)}`
+            ];
+          o.fylke = index.config.meta[`AO-${o.kommune.substring(0, 2)}`];
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
