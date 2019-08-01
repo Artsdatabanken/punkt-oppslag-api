@@ -26,7 +26,9 @@ module.exports = function(app, index) {
           environment: {}
         };
         Object.keys(node).forEach(key => {
-          const o = { ...node[key], ...index.config.meta[key] };
+          const stats = node[key];
+          key = key.replace("S3-", "S3"); // HACK
+          const o = { ...stats, ...index.config.meta[key] };
           delete o.kart;
           delete o.bbox;
           delete o.gradient;
@@ -38,7 +40,6 @@ module.exports = function(app, index) {
           delete o.datakilde;
           aktiver(o.barn, o.v);
           if (key !== "kommune") {
-            key = key.replace("S3-", "S3"); // HACK
             r.environment[key] = o;
           }
         });
