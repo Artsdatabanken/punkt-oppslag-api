@@ -37,7 +37,10 @@ module.exports = function(app, index) {
           delete o.undernivå;
           delete o.datakilde;
           aktiver(o.barn, o.v);
-          if (key !== "kommune") r.environment[key] = o;
+          if (key !== "kommune") {
+            key = key.replace("S3-", "S3"); // HACK
+            r.environment[key] = o;
+          }
         });
         if (node.kommune) {
           r.k = node.kommune;
