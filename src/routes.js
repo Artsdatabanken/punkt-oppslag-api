@@ -76,6 +76,7 @@ function collapse(node) {
   Object.keys(node).map(key => {
     r = Object.assign(r, node[key]);
   });
+  delete r.key;
   return r;
 }
 
