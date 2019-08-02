@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/punkt-oppslag-api.js",
-      "args": ["../punkt-oppslag-lastejobb/data/"]
+      "args": ["../lastejobb/punkt-oppslag-lastejobb/data/"]
     }
   ]
 }
