@@ -58,8 +58,13 @@ class Index {
   }
 
   loadMeta(buildpath) {
-    const data = fs.readFileSync(path.join(buildpath, "metabase.json"));
-    this.config.meta = JSON.parse(data);
+    this.config.meta = readJson(path.join(buildpath, "metabase.json"));
+    //    this.config.meta = readJson(path.join(buildpath, "metabase.json"));
+  }
+
+  readJson(directory, filename) {
+    const data = fs.readFileSync(path.join(directory, filename));
+    return JSON.parse(data);
   }
 
   openDatabase(buildPath) {

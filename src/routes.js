@@ -39,7 +39,9 @@ module.exports = function(app, index) {
           delete o.undernivå;
           delete o.datakilde;
           aktiver(o.barn, o.v);
-          if (key !== "kommune") {
+          if (key === "NN-LA-TI") {
+            r.landskap = o;
+          } else if (key !== "kommune") {
             r.environment[key] = o;
           }
         });
@@ -74,8 +76,10 @@ function collapse(node) {
 function aktiver(barn, verdi) {
   if (!barn) return;
   barn.forEach(b => {
-    const { min, max } = b.intervall;
-    b.aktiv = min <= verdi && max >= verdi;
+    if (b.intervall) {
+      const { min, max } = b.intervall;
+      b.aktiv = min <= verdi && max >= verdi;
+    }
     delete b.normalisertVerdi;
     delete b.farge;
     b.bilde = b.url + "/foto_408.jpg";
