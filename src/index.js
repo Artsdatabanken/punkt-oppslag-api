@@ -13,10 +13,10 @@ class Index {
   }
 
   async get(x, y) {
-    let coord = reproject(x, y);
-    coord = this.normalize(coord, this.config.bounds);
+    let utmcoord = reproject(x, y);
+    let coord = this.normalize(utmcoord, this.config.bounds);
     let key = "";
-    const r = { utm: { x, y, bounds: this.config.bounds } };
+    const r = { utm: { x, y, utmcoord, coord, bounds: this.config.bounds } };
     let z = 0;
     while (true) {
       const tile = await this.getTile(key);
