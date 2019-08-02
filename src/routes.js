@@ -17,6 +17,7 @@ module.exports = function(app, index) {
       .get(req.params.x, req.params.y)
       .then(node => {
         if (!node) return next();
+        delete node.utm;
         node = collapse(node);
         const r = {
           sted: {
