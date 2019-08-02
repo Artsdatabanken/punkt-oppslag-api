@@ -41,6 +41,11 @@ module.exports = function(app, index) {
           aktiver(o.barn, o.v);
           if (key === "NN-LA-TI") {
             r.landskap = o;
+            const index = o.v;
+            if (index) {
+              const kode = index.config.la_index[index];
+              if (kode) r.landskap = index.config.meta[kode];
+            }
           } else if (key !== "kommune") {
             r.environment[key] = o;
           }

@@ -59,7 +59,12 @@ class Index {
 
   loadMeta(buildpath) {
     this.config.meta = this.readJson(buildpath, "metabase.json");
-    //    this.config.meta = readJson(path.join(buildpath, "metabase.json"));
+    const la = readJson(path.join(buildpath, "la_index.json"));
+    // Swap key & value
+    this.config.la_index = Object.entries(la).reduce((acc, v) => {
+      acc[v[1]] = v[0];
+      return acc;
+    }, {});
   }
 
   readJson(directory, filename) {
