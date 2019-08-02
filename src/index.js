@@ -58,7 +58,7 @@ class Index {
   }
 
   loadMeta(buildpath) {
-    this.config.meta = readJson(path.join(buildpath, "metabase.json"));
+    this.config.meta = this.readJson(path.join(buildpath, "metabase.json"));
     //    this.config.meta = readJson(path.join(buildpath, "metabase.json"));
   }
 
