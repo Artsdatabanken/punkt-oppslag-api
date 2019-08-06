@@ -47,15 +47,14 @@ module.exports = function(app, index) {
               const kode = index.config.la_index[laindex];
               if (kode) r.landskap = index.config.meta[kode];
             }
-          } else if (key !== "kommune") {
+          } else if (key !== "AO") {
             r.environment[key] = o;
           }
         });
-        if (node.kommune) {
-          r.k = node.kommune;
-          let knr = node.kommune.v.toString();
+        if (node.AO) {
+          r.k = node.AO;
+          let knr = node.AO.v.toString();
           knr = knr.length < 4 ? "0" + knr : knr;
-          r.knr = knr;
           r.kommune =
             index.config.meta[
               `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
