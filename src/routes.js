@@ -51,7 +51,7 @@ module.exports = function(app, index) {
             r.environment[key] = o;
           }
         });
-        if (node.AO) {
+        if (node.AO && node.AO.v) {
           r.k = node.AO;
           let knr = node.AO.v.toString();
           knr = knr.length < 4 ? "0" + knr : knr;
