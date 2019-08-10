@@ -21,7 +21,8 @@ module.exports = function(app, index) {
         node = collapse(node);
         const r = {
           sted: {
-            navn: "Rjukanfossen",
+            kommentar: "Denne vil komme fra et eget API som før",
+            navn: "",
             kategori: ["ferskvann", "rennendeVann", "foss"]
           },
           environment: {}
