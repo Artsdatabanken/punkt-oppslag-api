@@ -27,7 +27,7 @@ class Index {
       if (!tile) return r;
       r[z] = JSON.parse(tile.tile_data);
       r[z].key = key;
-      key += x > 0.5 ? 1 : 0 + y > 0.5 ? 2 : 0;
+      key += (x > 0.5 ? 1 : 0) + (y > 0.5 ? 2 : 0);
       x = 2 * (x % 0.5);
       y = 2 * (y % 0.5);
       z++;
