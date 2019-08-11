@@ -12,6 +12,16 @@ module.exports = function(app, index) {
       });
   });
 
+  // Fetch tile from database using the quadtile key
+  // example /0323
+  app.get("/:quadkey", (req, res, next) => {
+    index.getTile(req.params.quadkey).then(node => {
+      if (!node) return next();
+      res.setHeader("Content-Type", "application/json");
+      res.send(node.tile_data);
+    });
+  });
+
   app.get("/:x,:y", (req, res, next) => {
     index
       .get(req.params.x, req.params.y)
@@ -20,16 +30,11 @@ module.exports = function(app, index) {
         delete node.utm;
         node = collapse(node);
         const r = {
-          sted: {
-            kommentar: "Denne vil komme fra et eget API som før",
-            navn: "",
-            kategori: ["ferskvann", "rennendeVann", "foss"]
-          },
           environment: {}
         };
         Object.keys(node).forEach(key => {
           const stats = node[key];
-          key = key.replace("S3-", "S3"); // HACK
+          if ("S3-".indexOf(key) >= 0) return;
           const o = { ...stats, ...index.config.meta[key] };
           delete o.kart;
           delete o.bbox;
