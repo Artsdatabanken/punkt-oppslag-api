@@ -22,9 +22,10 @@ class Index {
       utm: { latX, latY, utmcoord, coord, bounds: this.config.bounds }
     };
     let z = 0;
-    while (true) {
+    while (z <= 16) {
+      // TODO
       const tile = await this.getTile(key);
-      if (!tile) return r;
+      if (!tile) continue;
       r[z] = JSON.parse(tile.tile_data);
       r[z].key = key;
       key += (x > 0.5 ? 1 : 0) + (y > 0.5 ? 2 : 0);
