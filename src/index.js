@@ -16,6 +16,12 @@ class Index {
     const o = this.config.meta[kode];
     if (!o) return { kode: kode, melding: "Metadata mangler" };
     delete o.kart;
+    delete o.autorkode;
+    delete o.geografi;
+    delete o.lenke;
+    delete o.mediakilde;
+    delete o.stats;
+    delete o.overordnet;
     delete o.bbox;
     delete o.gradient;
     delete o.type;
