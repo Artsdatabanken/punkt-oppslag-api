@@ -33,7 +33,8 @@ module.exports = function(app, index) {
           environment: {}
         };
         Object.keys(node).forEach(key => {
-          const stats = node[key];
+          let stats = node[key];
+          if (typeof stats === "number") stats = { v: stats };
           if ("S3-".indexOf(key) >= 0) return;
           const o = { ...stats, ...index.config.meta[key] };
           delete o.kart;
@@ -47,7 +48,7 @@ module.exports = function(app, index) {
           delete o.datakilde;
           aktiver(o.barn, o.v);
           if (key === "NN-LA-TI") {
-            const laindex = o;
+            const laindex = o.v;
             if (laindex) {
               const kode = index.config.la_index[laindex];
               if (kode) r.landskap = index.config.meta[kode];
