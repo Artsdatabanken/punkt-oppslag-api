@@ -47,8 +47,7 @@ module.exports = function(app, index) {
           delete o.datakilde;
           aktiver(o.barn, o.v);
           if (key === "NN-LA-TI") {
-            r.landskap = o;
-            const laindex = o.v;
+            const laindex = o;
             if (laindex) {
               const kode = index.config.la_index[laindex];
               if (kode) r.landskap = index.config.meta[kode];
