@@ -22,6 +22,8 @@ class Index {
     delete o.mediakilde;
     delete o.stats;
     delete o.overordnet;
+    delete o.pred_lnr;
+    delete o.osm;
     delete o.bbox;
     delete o.gradient;
     delete o.type;
