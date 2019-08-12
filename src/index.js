@@ -22,17 +22,18 @@ class Index {
       utm: { latX, latY, utmcoord, coord, bounds: this.config.bounds }
     };
     let z = 0;
-    while (z <= 16) {
-      // TODO
+    while (z <= this.config.maxzoom) {
       const tile = await this.getTile(key);
-      if (!tile) continue;
-      r[z] = JSON.parse(tile.tile_data);
-      r[z].key = key;
+      if (tile) {
+        r[z] = JSON.parse(tile.tile_data);
+        r[z].key = key;
+      }
       key += (x > 0.5 ? 1 : 0) + (y > 0.5 ? 2 : 0);
       x = 2 * (x % 0.5);
       y = 2 * (y % 0.5);
       z++;
     }
+    return r;
   }
 
   async getTile(key) {
@@ -56,6 +57,10 @@ class Index {
     let config = JSON.parse(data);
     config.bounds.width = config.bounds.right - config.bounds.left;
     config.bounds.height = config.bounds.top - config.bounds.bottom;
+    config.maxzoom = 10;
+    Object.values(config.layers).forEach(
+      layer => (config.maxzoom = Math.max(config.maxzoom, layer.zoom))
+    );
     this.config = config;
     const buildpath = path.join(this.rootDirectory, config.buildPath);
     this.db = this.openDatabase(buildpath);
