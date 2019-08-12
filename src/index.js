@@ -12,6 +12,22 @@ class Index {
     ];
   }
 
+  hentMeta(kode) {
+    const o = this.config.meta[kode];
+    if (!o) return { kode: kode, melding: "Metadata mangler" };
+    delete o.kart;
+    delete o.bbox;
+    delete o.gradient;
+    delete o.type;
+    delete o.flagg;
+    delete o.farge;
+    delete o.nivå;
+    delete o.kart;
+    delete o.undernivå;
+    delete o.datakilde;
+    return o;
+  }
+
   async get(latX, latY) {
     let utmcoord = reproject(latX, latY);
     let coord = this.normalize(utmcoord, this.config.bounds);

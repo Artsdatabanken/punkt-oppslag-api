@@ -36,22 +36,13 @@ module.exports = function(app, index) {
           let stats = node[key];
           if (typeof stats === "number") stats = { v: stats };
           if ("S3-".indexOf(key) >= 0) return;
-          const o = { ...stats, ...index.config.meta[key] };
-          delete o.kart;
-          delete o.bbox;
-          delete o.gradient;
-          delete o.type;
-          delete o.flagg;
-          delete o.farge;
-          delete o.nivå;
-          delete o.undernivå;
-          delete o.datakilde;
+          const o = { ...stats, ...index.hentMeta(key) };
           aktiver(o.barn, o.v);
           if (key === "NN-LA-TI") {
             const laindex = o.v;
             if (laindex) {
               const kode = index.config.la_index[laindex];
-              if (kode) r.landskap = index.config.meta[kode];
+              if (kode) r.landskap = index.hentMeta(kode);
             }
           } else if (key !== "AO") {
             r.environment[key] = o;
@@ -60,11 +51,10 @@ module.exports = function(app, index) {
         if (node.AO) {
           let knr = node.AO.toString();
           knr = knr.length < 4 ? "0" + knr : knr;
-          r.kommune =
-            index.config.meta[
-              `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
-            ];
-          r.fylke = index.config.meta[`AO-${knr.substring(0, 2)}`];
+          r.kommune = index.hentMeta(
+            `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
+          );
+          r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
