@@ -57,9 +57,8 @@ module.exports = function(app, index) {
             r.environment[key] = o;
           }
         });
-        if (node.AO && node.AO.v) {
-          r.k = node.AO;
-          let knr = node.AO.v.toString();
+        if (node.AO) {
+          let knr = node.AO.toString();
           knr = knr.length < 4 ? "0" + knr : knr;
           r.kommune =
             index.config.meta[
