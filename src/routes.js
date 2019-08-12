@@ -55,6 +55,7 @@ module.exports = function(app, index) {
             `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
           );
           r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
+          if (r.fylke) delete r.fylke.barn;
         }
         res.setHeader("Content-Type", "application/json");
         res.send(r);
