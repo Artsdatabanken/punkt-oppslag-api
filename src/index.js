@@ -25,7 +25,7 @@ class Index {
     delete o.pred_lnr;
     delete o.osm;
     delete o.bbox;
-    delete o.gradient;
+    if (kode.indexOf("NN-LA-TI") !== 0) delete o.gradient;
     delete o.type;
     delete o.flagg;
     delete o.farge;
