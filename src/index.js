@@ -13,7 +13,7 @@ class Index {
   }
 
   hentMeta(kode) {
-    kode = kode.replace("AO-", "AO-FY-"); // TEMP HACK
+    kode = kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
     const o = this.config.meta[kode];
     if (!o) return { kode: kode, melding: "Metadata mangler" };
     delete o.kart;
