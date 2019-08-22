@@ -15,7 +15,7 @@ class Index {
   hackTempKode(kode) {
     if (kode === "NN-NA-BS-6SE") return "NN-NA-BS-6SO";
     if (kode === "NN-NA-BS-6SO") return "NN-NA-BS-6SE";
-    kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+    return kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
   }
 
   hentMeta(kode) {
