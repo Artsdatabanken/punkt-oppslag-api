@@ -12,8 +12,14 @@ class Index {
     ];
   }
 
+  hackTempKode(kode) {
+    if (kode === "NN-NA-BS-6SE") return "NN-NA-BS-6SO";
+    if (kode === "NN-NA-BS-6SO") return "NN-NA-BS-6SE";
+    kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+  }
+
   hentMeta(kode) {
-    kode = kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+    kode = hackTempKode(kode);
     const o = this.config.meta[kode];
     if (!o) return { kode: kode, melding: "Metadata mangler" };
     delete o.kart;
