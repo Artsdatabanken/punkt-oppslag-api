@@ -19,7 +19,7 @@ class Index {
   }
 
   hentMeta(kode) {
-    kode = hackTempKode(kode);
+    kode = this.hackTempKode(kode);
     const o = this.config.meta[kode];
     if (!o) return { kode: kode, melding: "Metadata mangler" };
     delete o.kart;
