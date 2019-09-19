@@ -37,9 +37,10 @@ class Index {
     delete o.flagg;
     delete o.farge;
     delete o.nivå;
-    delete o.kart;
     delete o.undernivå;
     delete o.datakilde;
+    if (o.kart)
+      o.kart = { målestokk: o.kart.målestokk, presisjon: o.kart.presisjon };
     return o;
   }
 
