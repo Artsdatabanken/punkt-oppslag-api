@@ -101,7 +101,9 @@ class Index {
   }
 
   loadMeta(buildpath) {
-    this.config.meta = this.readJson(buildpath, "metabase.json");
+    const metabase = this.readJson(buildpath, "metabase.json");
+    if (!metabase.items) throw new Error("Finner ikke items i metabase.");
+    this.config.meta = metabase.items;
     const la = this.readJson(buildpath, "la_index.json");
     // Swap key & value
     this.config.la_index = Object.entries(la).reduce((acc, v) => {
