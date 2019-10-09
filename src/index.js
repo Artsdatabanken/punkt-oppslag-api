@@ -39,7 +39,7 @@ class Index {
     delete o.nivå;
     delete o.undernivå;
     delete o.datakilde;
-    if (o.kart)
+    if (!o.kart)
       o.kart = { målestokk: o.kart.målestokk, presisjon: o.kart.presisjon };
     return o;
   }
