@@ -22,7 +22,7 @@ class Index {
     kode = this.hackTempKode(kode);
     const o = this.config.meta[kode];
     if (!o) return { kode: kode, melding: "Metadata mangler" };
-    delete o.kart;
+    //    delete o.kart;
     delete o.autorkode;
     delete o.geografi;
     delete o.lenke;
@@ -31,11 +31,11 @@ class Index {
     delete o.overordnet;
     delete o.pred_lnr;
     delete o.osm;
-    delete o.bbox;
+    //    delete o.bbox;
     if (kode.indexOf("NN-LA-TI") !== 0) delete o.gradient;
     delete o.type;
     delete o.flagg;
-    delete o.farge;
+    //    delete o.farge;
     delete o.nivå;
     delete o.undernivå;
     delete o.datakilde;
