@@ -82,8 +82,8 @@ function aktiver(barn, verdi) {
       const { min, max } = b.intervall;
       b.aktiv = min <= verdi && max >= verdi;
     }
-    delete b.normalisertVerdi;
-    delete b.farge;
+    //    delete b.normalisertVerdi;
+    //    delete b.farge;
     b.bilde = b.url + "/foto_408.jpg";
   });
 }
