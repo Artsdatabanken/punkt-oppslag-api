@@ -1,4 +1,7 @@
 module.exports = function(app, index) {
+  app.get("/", (req, res, nest) => {
+    res.send('Eksempel: <a href="/10,63">punkt/10,63</a>');
+  });
   app.get("/raw/:x,:y", (req, res, next) => {
     index
       .get(req.params.x, req.params.y)
