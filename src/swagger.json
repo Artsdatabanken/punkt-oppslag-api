@@ -1,0 +1,57 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Kilde til informasjon om innhold på et gitt sted.\n[https://punkt.artsdatabanken.no/](https://punkt.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
+    "version": "1.0.0",
+    "title": "Punkt API",
+    "contact": {
+      "email": "bjorn.reppen@artsdatabanken.no"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "paths": {
+    "/punkt": {
+      "get": {
+        "summary": "Slå opp innhold fra lengde- og breddegrad",
+        "description": "",
+        "operationId": "getPunkt",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Lengdegrad i WGS-84 desimalgrader",
+            "required": true,
+            "default": 10.5,
+            "type": "number"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Breddegrad i WGS-84 desimalgrader",
+            "required": true,
+            "default": 63,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about punkt-oppslag-api on GitHub",
+    "url": "https://github.com/Artsdatabanken/punkt-oppslag-api"
+  }
+}

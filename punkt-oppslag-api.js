@@ -5,6 +5,7 @@ const minimist = require("minimist");
 const routes = require("./src/routes");
 const Index = require("./src/index");
 const pjson = require("./package.json");
+const swagger = require("./src/swagger");
 
 var argv = minimist(process.argv.slice(2), { alias: { p: "port" } });
 if (argv._.length !== 1) {
@@ -44,6 +45,7 @@ index.rootDirectory = path.resolve(argv._[0] || ".");
 index.load();
 
 routes(app, index);
+swagger.init(app);
 
 app.listen(port, () => {
   log.info("Server root directory " + index.rootDirectory);

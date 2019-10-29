@@ -1,12 +1,7 @@
 module.exports = function(app, index) {
-  app.get("/", (req, res, nest) => {
-    res.send(
-      'Query API for geographic points<p>Example: <a href="/10,63">punkt/10,63</a>'
-    );
-  });
-  app.get("/raw/:x,:y", (req, res, next) => {
+  app.get("/v1/raw", (req, res, next) => {
     index
-      .get(req.params.x, req.params.y)
+      .get(req.query.lon, req.query.lat)
       .then(node => {
         if (!node) return next();
         res.setHeader("Content-Type", "application/json");
@@ -19,7 +14,7 @@ module.exports = function(app, index) {
 
   // Fetch tile from database using the quadtile key
   // example /0323
-  app.get("/:quadkey", (req, res, next) => {
+  app.get("/v1/quadtile/:quadkey", (req, res, next) => {
     index.getTile(req.params.quadkey).then(node => {
       if (!node) return next();
       res.setHeader("Content-Type", "application/json");
@@ -27,9 +22,9 @@ module.exports = function(app, index) {
     });
   });
 
-  app.get("/:x,:y", (req, res, next) => {
+  app.get("/v1/punkt", (req, res, next) => {
     index
-      .get(req.params.x, req.params.y)
+      .get(req.query.lon, req.query.lat)
       .then(node => {
         if (!node) return next();
         delete node.utm;
