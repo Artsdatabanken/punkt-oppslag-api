@@ -31,7 +31,7 @@
             "type": "number"
           },
           {
-            "name": "lon",
+            "name": "lng",
             "in": "query",
             "description": "Breddegrad i WGS-84 desimalgrader",
             "required": true,
