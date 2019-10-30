@@ -1,7 +1,7 @@
 module.exports = function(app, index) {
   app.get("/v1/raw", (req, res, next) => {
     index
-      .get(req.query.lon, req.query.lat)
+      .get(req.query.lng, req.query.lat)
       .then(node => {
         if (!node) return next();
         res.setHeader("Content-Type", "application/json");
