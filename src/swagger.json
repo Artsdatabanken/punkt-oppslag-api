@@ -27,7 +27,7 @@
             "in": "query",
             "description": "Lengdegrad i WGS-84 desimalgrader",
             "required": true,
-            "default": 10.5,
+            "default": 63,
             "type": "number"
           },
           {
@@ -35,7 +35,7 @@
             "in": "query",
             "description": "Breddegrad i WGS-84 desimalgrader",
             "required": true,
-            "default": 63,
+            "default": 10.5,
             "type": "number"
           }
         ],
