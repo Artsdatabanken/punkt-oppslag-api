@@ -10,5 +10,5 @@ WORKDIR /app
 COPY --from=dep /node_modules ./node_modules
 EXPOSE 8000
 ADD . .
-
+USER dockerrunner
 CMD [ "node", "punkt-oppslag-api.js", "--port", "8000", "/data/" ]
