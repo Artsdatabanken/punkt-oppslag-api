@@ -48,15 +48,11 @@ module.exports = function(app, index) {
             r.environment[key] = o;
           }
         });
-        if (node.AO) {
-          let knr = node.AO.toString();
-          knr = knr.length < 4 ? "0" + knr : knr;
-          r.kommune = index.hentMeta(
-            `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
-          );
-          r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
-          if (r.fylke) delete r.fylke.barn;
-        }
+        mapFylkeOgKommune(node, r)
+        
+        if(req.layer) 
+          r = r[req.layer] || {}
+        
         res.setHeader("Content-Type", "application/json");
         res.send(r);
       })
@@ -65,6 +61,17 @@ module.exports = function(app, index) {
       });
   });
 };
+
+function mapFylkeOgKommune(node, r) {
+  if (!node.AO) return 
+    let knr = node.AO.toString();
+    knr = knr.length < 4 ? "0" + knr : knr;
+    r.kommune = index.hentMeta(
+      `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
+    );
+    r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
+    if (r.fylke) delete r.fylke.barn;
+}
 
 function collapse(node) {
   let r = {};

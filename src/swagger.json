@@ -37,6 +37,14 @@
             "required": true,
             "default": 10.5,
             "type": "number"
+          },
+          {
+            "name": "layer",
+            "in": "query",
+            "description": "Only return specified layer, specify the key from the result json",
+            "required": false,
+            "default": "",
+            "type": "string"
           }
         ],
         "responses": {
@@ -47,7 +55,7 @@
             "description": "Invalid status value"
           }
         }
-      }
+      },
     }
   },
   "externalDocs": {
