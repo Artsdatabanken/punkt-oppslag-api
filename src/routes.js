@@ -1,4 +1,4 @@
-module.exports = function(app, index) {
+module.exports = function (app, index) {
   app.get("/v1/raw", (req, res, next) => {
     index
       .get(req.query.lng, req.query.lat)
@@ -48,11 +48,11 @@ module.exports = function(app, index) {
             r.environment[key] = o;
           }
         });
-        mapFylkeOgKommune(node, r)
-        
-        if(req.layer) 
+        mapFylkeOgKommune(index, node, r)
+
+        if (req.layer)
           r = r[req.layer] || {}
-        
+
         res.setHeader("Content-Type", "application/json");
         res.send(r);
       })
@@ -62,15 +62,15 @@ module.exports = function(app, index) {
   });
 };
 
-function mapFylkeOgKommune(node, r) {
-  if (!node.AO) return 
-    let knr = node.AO.toString();
-    knr = knr.length < 4 ? "0" + knr : knr;
-    r.kommune = index.hentMeta(
-      `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
-    );
-    r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
-    if (r.fylke) delete r.fylke.barn;
+function mapFylkeOgKommune(index, node, r) {
+  if (!node.AO) return
+  let knr = node.AO.toString();
+  knr = knr.length < 4 ? "0" + knr : knr;
+  r.kommune = index.hentMeta(
+    `AO-${knr.substring(0, 2)}-${knr.substring(2, 4)}`
+  );
+  r.fylke = index.hentMeta(`AO-${knr.substring(0, 2)}`);
+  if (r.fylke) delete r.fylke.barn;
 }
 
 function collapse(node) {
