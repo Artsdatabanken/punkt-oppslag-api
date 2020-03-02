@@ -50,8 +50,8 @@ module.exports = function (app, index) {
         });
         mapFylkeOgKommune(index, node, r)
 
-        if (req.layer)
-          r = r[req.layer] || {}
+        if (req.query.layer)
+          r = r[req.query.layer] || {}
 
         res.setHeader("Content-Type", "application/json");
         res.send(r);
