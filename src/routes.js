@@ -29,9 +29,7 @@ module.exports = function (app, index) {
         if (!node) return next();
         delete node.utm;
         node = collapse(node);
-        const r = {
-          environment: {}
-        };
+        var r = {};
         Object.keys(node).forEach(key => {
           let stats = node[key];
           if (typeof stats === "number") stats = { v: stats };
@@ -45,7 +43,7 @@ module.exports = function (app, index) {
               if (kode) r.landskap = index.hentMeta(kode);
             }
           } else if (key !== "AO") {
-            r.environment[key] = o;
+            r[key] = o;
           }
         });
         mapFylkeOgKommune(index, node, r)
