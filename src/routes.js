@@ -35,7 +35,7 @@ module.exports = function (app, index) {
           if (typeof stats === "number") stats = { v: stats };
           if ("S3-".indexOf(key) >= 0) return;
           const o = { ...stats, ...index.hentMeta(key) };
-          aktiver(o.barn, o.v);
+          aktiver(o, o.v);
           if (key === "NN-LA-TI") {
             const laindex = o.v;
             if (laindex) {
@@ -80,15 +80,15 @@ function collapse(node) {
   return r;
 }
 
-function aktiver(barn, verdi) {
+function aktiver(o, verdi) {
+  const barn = o.barn
   if (!barn) return;
   barn.forEach(b => {
     if (b.intervall) {
       const { min, max } = b.intervall;
       b.aktiv = min <= verdi && max >= verdi;
+      o.trinn = b
     }
-    //    delete b.normalisertVerdi;
-    //    delete b.farge;
     b.bilde = b.url + "/foto_408.jpg";
   });
 }
