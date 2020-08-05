@@ -1,4 +1,41 @@
+const hoydeprofil = require('./hoydeprofil')
+
 module.exports = function (app, index) {
+  // Konverterer query argument med punkter til GPX track XML
+  // Brukes for å kalle https://www.kartverket.no/data/Hoydeprofil/
+  app.get("/v1/gpx", (req, res, next) => {
+    console.log(req.query)
+    hoydeprofil.gpx(req.query.punkter).then(result => {
+      res.setHeader("Content-Type", "application/xml");
+      res.send(result);
+    })
+      .catch(err => {
+        next(err);
+      });
+  })
+
+  app.get("/v1/hoydeprofil/chart", (req, res, next) => {
+    hoydeprofil.chart(req.query.punkter).then(result => {
+      res.setHeader("Content-Type", "application/json");
+      console.log('return', result)
+      res.send(result)
+    })
+      .catch(err => {
+        next(err);
+      });
+  })
+
+  app.get("/v1/hoydeprofil/json", (req, res, next) => {
+    hoydeprofil.json(req.query.punkter).then(result => {
+      res.setHeader("Content-Type", "application/json");
+      console.log('return', result)
+      res.send(result)
+    })
+      .catch(err => {
+        next(err);
+      });
+  })
+
   app.get("/v1/raw", (req, res, next) => {
     index
       .get(req.query.lng, req.query.lat)
