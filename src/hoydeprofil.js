@@ -11,10 +11,9 @@ const gpxTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
     </trk>
 </gpx>  `
 
-async function chart(points) {
+async function diagram(points) {
     try {
         const callbackUrl = "http://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
-        //const callbackUrl = "http://punkt.test.artsdatabanken.no/gpx.xml"
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationChart&datainputs=gpx=@xlink:href=" + callbackUrl
         const res = await fetch(url)
         const xml = await res.text()
@@ -59,4 +58,4 @@ async function gpx(pointstring) {
     return gpx
 }
 
-module.exports = { chart, json, gpx }
+module.exports = { diagram, json, gpx }

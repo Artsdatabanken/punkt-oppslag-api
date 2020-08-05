@@ -13,14 +13,18 @@
     }
   },
   "basePath": "/v1",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/punkt": {
       "get": {
         "summary": "Slå opp innhold fra lengde- og breddegrad",
         "description": "",
         "operationId": "getPunkt",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "lat",
@@ -44,6 +48,90 @@
             "description": "Only return specified layer, specify the key from the result json",
             "required": false,
             "default": "",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/gpx": {
+      "get": {
+        "summary": "Konverter liste med koordinater til GPX-format.",
+        "description": "Brukes for å serve GPX-fil til Kartverket Høydedata API.",
+        "operationId": "getGpx",
+        "produces": [
+          "application/gpx+xml"
+        ],
+        "parameters": [
+          {
+            "name": "punkter",
+            "in": "query",
+            "description": "Kommaseparert liste med lengdegrad,breddegrad,lengdegrad,breddegrad...",
+            "required": true,
+            "default": "63,10,64,10.5",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/hoydeprofil/diagram": {
+      "get": {
+        "summary": "Lager høydeprofil visualisering i PNG-format.",
+        "description": "Returnerer en json med URLen til bildet.  Se https://www.kartverket.no/data/Hoydeprofil/",
+        "operationId": "getHoydeprofilDiagram",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "punkter",
+            "in": "query",
+            "description": "Kommaseparert liste med lengdegrad,breddegrad,lengdegrad,breddegrad...",
+            "required": true,
+            "default": "63,10,64,10.5",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/hoydeprofil/json": {
+      "get": {
+        "summary": "Lager høydeprofil statistikk som JSON.",
+        "description": "Se https://www.kartverket.no/data/Hoydeprofil/",
+        "operationId": "getHoydeprofilJson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "punkter",
+            "in": "query",
+            "description": "Kommaseparert liste med lengdegrad,breddegrad,lengdegrad,breddegrad...",
+            "required": true,
+            "default": "63,10,64,10.5",
             "type": "string"
           }
         ],

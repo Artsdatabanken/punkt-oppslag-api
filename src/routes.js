@@ -5,7 +5,7 @@ module.exports = function (app, index) {
   // Brukes for å kalle https://www.kartverket.no/data/Hoydeprofil/
   app.get("/v1/gpx", (req, res, next) => {
     hoydeprofil.gpx(req.query.punkter).then(result => {
-      res.setHeader("Content-Type", "application/xml");
+      res.setHeader("Content-Type", "application/gpx+xml");
       res.send(result);
     })
       .catch(err => {
@@ -13,8 +13,8 @@ module.exports = function (app, index) {
       });
   })
 
-  app.get("/v1/hoydeprofil/chart", (req, res, next) => {
-    hoydeprofil.chart(req.query.punkter).then(result => {
+  app.get("/v1/hoydeprofil/diagram", (req, res, next) => {
+    hoydeprofil.diagram(req.query.punkter).then(result => {
       res.setHeader("Content-Type", "application/json");
       res.send(result)
     })
