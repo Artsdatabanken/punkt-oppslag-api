@@ -61,6 +61,42 @@
         }
       }
     },
+    "/punktvektor": {
+      "get": {
+        "summary": "Slå opp innhold i vektoriserte kart fra lengde- og breddegrad",
+        "description": "",
+        "operationId": "getPunkt",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Lengdegrad i WGS-84 desimalgrader",
+            "required": true,
+            "default": 63,
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Breddegrad i WGS-84 desimalgrader",
+            "required": true,
+            "default": 10.5,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
     "/gpx": {
       "get": {
         "summary": "Konverter liste med koordinater til GPX-format.",

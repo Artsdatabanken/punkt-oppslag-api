@@ -13,7 +13,13 @@ class Index {
   }
 
   hackTempKode(kode) {
+    if (!kode) return ''
     return kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+  }
+
+  hentMetaFraAltKode(altkode) {
+    const kode = this.config.altkode2kode[altkode]
+    return this.hentMeta(kode)
   }
 
   hentMeta(kode) {
@@ -26,19 +32,18 @@ class Index {
     delete o.lenke;
     delete o.mediakilde;
     delete o.stats;
-    delete o.overordnet;
+    //delete o.overordnet;
     delete o.pred_lnr;
     delete o.osm;
     //    delete o.bbox;
     if (kode.indexOf("NN-LA-TI") !== 0) delete o.gradient;
-    delete o.type;
-    delete o.flagg;
+    //delete o.type;
+    //delete o.flagg;
     //    delete o.farge;
-    delete o.nivå;
+    //delete o.nivå;
     delete o.undernivå;
     delete o.datakilde;
-    if (!o.kart)
-      o.kart = { målestokk: o.kart.målestokk, presisjon: o.kart.presisjon };
+    o.kart = { målestokk: o.kart.målestokk, presisjon: o.kart.presisjon };
     return o;
   }
 
@@ -102,7 +107,9 @@ class Index {
     const metabase = this.readJson(buildpath, "metabase.json");
     if (!metabase.items) throw new Error("Finner ikke items i metabase.");
     this.config.meta = {};
+    this.config.altkode2kode = {};
     metabase.items.forEach(e => (this.config.meta[e.kode] = e));
+    metabase.items.forEach(e => { if (e.altkode) (this.config.altkode2kode[e.altkode] = e.kode) });
     const la = this.readJson(buildpath, "la_index.json");
     // Swap key & value
     this.config.la_index = Object.entries(la).reduce((acc, v) => {

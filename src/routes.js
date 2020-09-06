@@ -1,4 +1,5 @@
 const hoydeprofil = require('./hoydeprofil')
+const punktvektor = require('./punktvektor')
 
 module.exports = function (app, index) {
   // Konverterer query argument med punkter til GPX track XML
@@ -7,6 +8,16 @@ module.exports = function (app, index) {
     hoydeprofil.gpx(req.query.punkter).then(result => {
       res.setHeader("Content-Type", "application/gpx+xml");
       res.send(result);
+    })
+      .catch(err => {
+        next(err);
+      });
+  })
+
+  app.get("/v1/punktvektor", (req, res, next) => {
+    punktvektor.query(req.query.lng, req.query.lat, index).then(result => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(result)
     })
       .catch(err => {
         next(err);
