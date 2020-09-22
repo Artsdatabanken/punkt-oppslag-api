@@ -21,7 +21,7 @@ async function query(lng, lat, index) {
         const res = await fetch(url)
         const json = await res.json()
         json.forEach(e => {
-            if (e.data.kartleggingsenhet) {
+            if (e.data && e.data.kartleggingsenhet) {
                 for (var kl of e.data.kartleggingsenhet)
                     leggTilNaturtypeMeta(kl, index)
             }
