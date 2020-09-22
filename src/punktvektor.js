@@ -7,10 +7,10 @@ const mergeKeys = (target, source) => {
 
 const leggTilNaturtypeMeta = (kl, index) => {
     var meta = index.hentMeta(kl.kartleggingsenhetkode)
-    mergeKeys(e, meta)
+    mergeKeys(kl, meta)
     for (var v of (kl.variabler || [])) {
         meta = index.hentMeta(v.variabelkode)
-        mergeKeys(e, meta)
+        mergeKeys(v, meta)
     }
 }
 
