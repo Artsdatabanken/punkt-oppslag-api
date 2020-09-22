@@ -5,6 +5,15 @@ const mergeKeys = (target, source) => {
         target[key] = source[key])
 }
 
+const leggTilNaturtypeMeta = (kl) => {
+    var meta = index.hentMeta(kl.kartleggingsenhetkode)
+    mergeKeys(e, meta)
+    for (var v of (kl.variabler || [])) {
+        meta = index.hentMeta(v.variabelkode)
+        mergeKeys(e, meta)
+    }
+}
+
 async function query(lng, lat, index) {
     try {
         // TODO: Test/prod switch
@@ -12,6 +21,10 @@ async function query(lng, lat, index) {
         const res = await fetch(url)
         const json = await res.json()
         json.forEach(e => {
+            if (e.data.kartleggingsenhet) {
+                for (var kl of e.data.kartleggingsenhet)
+                    leggTilNaturtypeMeta(kl)
+            }
             if (e.id) {
                 const meta = index.hentMeta(e.id)
                 mergeKeys(e, meta)
@@ -26,7 +39,7 @@ async function query(lng, lat, index) {
         return json
     }
     catch (error) {
-        return { error: error }
+        return { error: error.message }
     }
 }
 
