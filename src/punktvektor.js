@@ -5,7 +5,7 @@ const mergeKeys = (target, source) => {
         target[key] = source[key])
 }
 
-const leggTilNaturtypeMeta = (kl) => {
+const leggTilNaturtypeMeta = (kl, index) => {
     var meta = index.hentMeta(kl.kartleggingsenhetkode)
     mergeKeys(e, meta)
     for (var v of (kl.variabler || [])) {
@@ -23,7 +23,7 @@ async function query(lng, lat, index) {
         json.forEach(e => {
             if (e.data.kartleggingsenhet) {
                 for (var kl of e.data.kartleggingsenhet)
-                    leggTilNaturtypeMeta(kl)
+                    leggTilNaturtypeMeta(kl, index)
             }
             if (e.id) {
                 const meta = index.hentMeta(e.id)
