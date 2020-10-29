@@ -132,7 +132,10 @@ function aktiver(o, verdi) {
     if (b.intervall) {
       const { min, max } = b.intervall;
       b.aktiv = min <= verdi && max >= verdi;
-      o.trinn = b
+      if (b.aktiv) {
+        o.tittel = b.tittel
+        o.underkode = b.kode
+      }
     }
     b.bilde = b.url + "/foto_408.jpg";
   });
