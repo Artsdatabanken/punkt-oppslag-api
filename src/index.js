@@ -14,7 +14,9 @@ class Index {
 
   hackTempKode(kode) {
     if (!kode) return ''
-    return kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+    kode = kode.replace("AO-", "AO-TO-FL-"); // TEMP HACK
+    kode = kode.replace('_', '-')
+    return kode
   }
 
   hentMetaFraAltKode(altkode) {
