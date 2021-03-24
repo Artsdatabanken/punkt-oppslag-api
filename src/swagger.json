@@ -65,7 +65,7 @@
       "get": {
         "summary": "Slå opp innhold i vektoriserte kart fra lengde- og breddegrad",
         "description": "",
-        "operationId": "getPunkt",
+        "operationId": "getPunktVektor",
         "produces": [
           "application/json"
         ],
