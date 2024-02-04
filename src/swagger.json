@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Kilde til informasjon om innhold på et gitt sted.\n[https://punkt.artsdatabanken.no/](https://punkt.artsdatabanken.no/) or on \n[https://artsdatabanken.slack.com/, #åpnedata](https://artsdatabanken.slack.com/).\n",
+    "description": "Kilde til informasjon om innhold på et gitt sted.\n[https://punkt.artsdatabanken.no/](https://punkt.artsdatabanken.no/)\n",
     "version": "1.0.0",
     "title": "Punkt API",
     "contact": {
