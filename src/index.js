@@ -1,8 +1,8 @@
-const log = require("log-less-fancy")();
-const path = require("path");
-const sqlite3 = require("sqlite3");
-const { reproject } = require("./reproject");
-const fs = require("fs");
+import log from "log-less-fancy";
+import path from "path";
+import sqlite3 from "sqlite3";
+import reproject from "./reproject.js";
+import fs from "fs";
 
 class Index {
   normalize(coord, bounds) {
@@ -134,4 +134,5 @@ class Index {
   }
 }
 
-module.exports = Index;
+//module.exports = Index;
+export default Index;

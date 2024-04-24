@@ -1,11 +1,11 @@
-const path = require("path");
-const express = require("express");
-const log = require("log-less-fancy")();
-const minimist = require("minimist");
-const routes = require("./src/routes");
-const Index = require("./src/index");
-const pjson = require("./package.json");
-const swagger = require("./src/swagger");
+import path from "path";
+import express from "express";
+import log from "log-less-fancy";
+import minimist from "minimist";
+import pjson from "./package.json" with {type: "json"};
+import swagger from "./src/swagger.js";
+import Index from "./src/index.js";
+import routes from "./src/routes.js";
 
 var argv = minimist(process.argv.slice(2), { alias: { p: "port" } });
 if (argv._.length !== 1) {
@@ -22,7 +22,7 @@ if (argv._.length !== 1) {
 
 const app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("X-Powered-By", "Punkt-oppslag v" + pjson.version);
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");

@@ -1,7 +1,8 @@
-const hoydeprofil = require('./hoydeprofil')
-const punktvektor = require('./punktvektor')
+import hoydeprofil from './hoydeprofil.js';
+import punktvektor from './punktvektor.js';
 
-module.exports = function (app, index) {
+//module.exports = function (app, index) {
+export default function (app, index) {
   // Konverterer query argument med punkter til GPX track XML
   // Brukes for å kalle https://www.kartverket.no/data/Hoydeprofil/
   app.get("/v1/gpx", (req, res, next) => {

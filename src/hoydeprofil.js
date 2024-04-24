@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch';
 
 const gpxTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <gpx version="1.1"
@@ -58,4 +58,5 @@ async function gpx(pointstring) {
     return gpx
 }
 
-module.exports = { diagram, json, gpx }
+//module.exports = { diagram, json, gpx }
+export default { diagram, json, gpx };
