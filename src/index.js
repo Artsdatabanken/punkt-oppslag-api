@@ -74,13 +74,13 @@ class Index {
   }
 
   async getTile(key) {
-    log.debug(`Read tile ${key}`);
+    log().debug(`Read tile ${key}`);
     const sql = "SELECT tile_data FROM tiles WHERE key=?";
     return await this.readdb(sql, [key]);
   }
 
   async readdb(sql, args = []) {
-    log.debug("SQL   : " + sql);
+    log().debug("SQL   : " + sql);
     return new Promise((resolve, reject) => {
       this.db.get(sql, args, (err, row) => {
         if (err) return reject(err);
@@ -127,7 +127,7 @@ class Index {
 
   openDatabase(buildPath) {
     const sqlitePath = path.join(buildPath, "index.sqlite");
-    log.info("Reading tiles from " + sqlitePath);
+    log().info("Reading tiles from " + sqlitePath);
     return new sqlite3.Database(sqlitePath, sqlite3.OPEN_READ, err => {
       if (err) throw new Error(err);
     });

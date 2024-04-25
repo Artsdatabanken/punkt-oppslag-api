@@ -48,6 +48,6 @@ routes(app, index);
 swagger.init(app);
 
 app.listen(port, () => {
-  log.info("Server root directory " + index.rootDirectory);
-  log.info("Server listening on port " + port);
+  log().info("Server root directory " + index.rootDirectory);
+  log().info("Server listening on port " + port);
 });

@@ -7,4 +7,4 @@ function init(app) {
 }
 
 //module.exports = { init };
-export default init;
+export default { init };
