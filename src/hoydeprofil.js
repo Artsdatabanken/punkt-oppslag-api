@@ -10,10 +10,10 @@ const gpxTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
         </trkseg>
     </trk>
 </gpx>  `
-
+//failing
 async function diagram(points) {
     try {
-        const callbackUrl = "http://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
+        const callbackUrl = "https://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationChart&datainputs=gpx=@xlink:href=" + callbackUrl
         const res = await fetch(url)
         console.log(res);
@@ -31,7 +31,7 @@ async function diagram(points) {
 
 async function json(points) {
     try {
-        const callbackUrl = "http://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
+        const callbackUrl = "https://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
         //const callbackUrl = "http://punkt.test.artsdatabanken.no/gpx.xml"
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationJSON&datainputs=gpx=@xlink:href=" + callbackUrl
         const res = await fetch(url)
