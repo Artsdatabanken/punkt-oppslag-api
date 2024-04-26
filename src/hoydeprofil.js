@@ -16,7 +16,9 @@ async function diagram(points) {
         const callbackUrl = "http://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationChart&datainputs=gpx=@xlink:href=" + callbackUrl
         const res = await fetch(url)
+        console.log(res);
         const xml = await res.text()
+        console.log(xml);
         const error = xml.match(/ExceptionText>(?<msg>.*?)\</)
         if (error) return { error: error.groups.msg }
         const imgUrl = xml.match(/image\/png\">(?<img>.*?)\</).groups.img
