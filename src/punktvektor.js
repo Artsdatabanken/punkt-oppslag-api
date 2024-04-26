@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch';
 
 const mergeKeys = (target, source) => {
     Object.keys(source).forEach(key =>
@@ -44,4 +44,5 @@ async function query(lng, lat, index) {
 }
 
 
-module.exports = { query }
+//module.exports = { query }
+export default { query };
