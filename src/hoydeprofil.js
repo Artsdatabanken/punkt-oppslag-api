@@ -10,16 +10,13 @@ const gpxTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
         </trkseg>
     </trk>
 </gpx>  `
-//failing
+
 async function diagram(points) {
     try {
         const callbackUrl = "https://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationChart&datainputs=gpx=@xlink:href=" + callbackUrl
-        console.log(url);
         const res = await fetch(url)
-        console.log(res);
         const xml = await res.text()
-        console.log(xml);
         const error = xml.match(/ExceptionText>(?<msg>.*?)\</)
         if (error) return { error: error.groups.msg }
         const imgUrl = xml.match(/https:\/\/[^<]+\.png/)[0];
@@ -36,11 +33,8 @@ async function json(points) {
         const callbackUrl = "https://punkt.test.artsdatabanken.no/v1/gpx?punkter=" + points
         //const callbackUrl = "http://punkt.test.artsdatabanken.no/gpx.xml"
         const url = "http://openwps.statkart.no/skwms1/wps.elevation2?request=Execute&service=WPS&version=1.0.0&identifier=elevationJSON&datainputs=gpx=@xlink:href=" + callbackUrl
-        console.log(url);
         const res = await fetch(url)
-        console.log(res);
         const xml = await res.text()
-        console.log(xml);
         const error = xml.match(/ExceptionText>(?<msg>.*?)\</)
         if (error) return { error: error.groups.msg }
         const jsonString = xml.match(/<!\[CDATA\[(.*?)\]\]>/)[1];
